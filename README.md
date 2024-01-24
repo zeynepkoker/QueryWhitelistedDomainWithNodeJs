@@ -17,3 +17,5 @@ Create database in MongoDb for mongoose connection.
 
 ## Running Server Locally
 Run `npm start` / `nodemon app` / `node app` 
+
+Server runs locally on port 3000
