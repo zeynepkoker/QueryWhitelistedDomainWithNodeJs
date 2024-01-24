@@ -1,0 +1,65 @@
+<%- include('partials/header'); %>
+
+        <div class="container d-flex justify-content-center mt-3">
+            <form action="query" method="post" class="d-flex w-50">
+                <input class="form-control" name="input" placeholder="Enter domain name">
+                <input type="submit" value="Search" class="btn btn-md btn-primary ms-2">
+                <a class="btn btn-md btn-danger ms-2" href="/history">History</a>
+                <a class="btn btn-md btn-success ms-2" href="#graph">Graph</a>
+            </form>
+        </div>
+        <% if(message.text != "null"){ %>
+            <div class="container d-flex justify-content-center mt-3">
+                <% if(message.status == "Ok"){ %>
+                    <h5 class="text-success"><%= message.text %></p>
+                <% } else { %>
+                    <h5 class="text-danger"><%= message.text %></p>
+                <% } %>
+            </div>
+         <% } %>
+        
+        <div class="container d-flex flex-column align-items-center mt-5">
+            <h4 class="text-primary text-decoration-underline mb-3">Last 50 Queries</h4>
+            <table class="table">
+                <thead class="table-dark">
+                    <th scope="col">#</th>
+                    <th scope="col">IP or Domain Name</th>
+                    <th scope="col">Query Result</th>
+                    <th scope="col">Record Type A</th>
+                    <th scope="col">Record Type AAAA</th>
+                    <th scope="col">Record Type MX</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% items.forEach((item, index) => { %>
+                        <tr>
+                            <td><%= index+1 %></td>
+                            <td><%= item.queryName %></td>
+                            <td><%= item.queryResponse %></td>
+                            <td>
+                                <% item.dns_enumeration_A.split(",").forEach(elem => { %>
+                                    <p><%= elem %></p>
+                                <% }) %>    
+                            </td>
+                            <td>
+                                <% item.dns_enumeration_AAAA.split(",").forEach(elem => { %>
+                                    <p><%= elem %></p>
+                                <% }) %>    
+                            </td>
+                            <td>
+                                <% item.dns_enumeration_MX.split(",").forEach(elem => { %>
+                                    <p><%= elem %></p>
+                                <% }) %>    
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+        </div>
+        <div class="container mt-5 mb-5 d-flex flex-column align-items-center" id="graph">
+            <h4 class="text-primary text-decoration-underline">Pie Chart for Last 50 Queries</h4>
+            <img src="<%= graphUrl %>" alt="">
+        </div>
+    </div>
+
+<%- include('partials/footer'); %>

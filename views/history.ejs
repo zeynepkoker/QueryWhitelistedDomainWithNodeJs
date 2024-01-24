@@ -1,0 +1,43 @@
+<%- include('partials/header'); %>
+
+<div class="container d-flex flex-column align-items-center mt-5">
+    <h4 class="text-primary text-decoration-underline mb-3">All History</h4>
+    <table class="table">
+        <thead class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">IP or Domain Name</th>
+            <th scope="col">Query Result</th>
+            <th scope="col">Record Type A</th>
+            <th scope="col">Record Type AAAA</th>
+            <th scope="col">Record Type MX</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% items.forEach((item, index) => { %>
+                <tr>
+                    <td><%= index+1 %></td>
+                    <td><%= item.queryName %></td>
+                    <td><%= item.queryResponse %></td>
+                    <td>
+                        <% item.dns_enumeration_A.split(",").forEach(elem => { %>
+                            <p><%= elem %></p>
+                        <% }) %>    
+                    </td>
+                    <td>
+                        <% item.dns_enumeration_AAAA.split(",").forEach(elem => { %>
+                            <p><%= elem %></p>
+                        <% }) %>    
+                    </td>
+                    <td>
+                        <% item.dns_enumeration_MX.split(",").forEach(elem => { %>
+                            <p><%= elem %></p>
+                        <% }) %>    
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+      </table>
+</div>
+    </div>
+
+<%- include('partials/footer'); %>
