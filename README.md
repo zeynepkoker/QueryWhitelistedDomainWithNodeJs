@@ -8,8 +8,11 @@ Python, pip, nodejs, npm
 
 ## Installation
 Run `npm install -g nodemon` for installing nodemon module globally.
+
 Run `npm install` for installing node modules.
+
 Run `pip install dnspython` for installing dnspython library.
+
 Create database in MongoDb for mongoose connection.
 
 ## Running Server Locally
